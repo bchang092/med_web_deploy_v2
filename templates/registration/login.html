@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% include "reg_base.html" %}
+
+    <style>
+        html, body {
+            margin: 0; /* Remove default margins */
+            padding: 0; /* Remove default padding */
+            height: 100%; /* Ensure html and body take the full height */
+            width: 100%; /* Ensure html and body take the full width */
+        }
+
+        .container {
+            display: flex; /* Enable flexbox */
+            justify-content: center; /* Horizontally center the form */
+            align-items: center; /* Vertically center the form */
+            background-image: url("{% static 'images/home_pages/login-bkg2.jpg' %}");
+            background-size: cover; /* Ensure the background image covers the entire container */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent tiling of the image */
+            width: 100%; /* Take up the full width */
+            height: 100vh; /* Take up the full height of the viewport */
+        }
+
+        form {
+            padding: 2rem; /* Add space inside the form */
+            border: 2px solid var(--text_col); /* Add a gray border */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 5px 5px 8px 5px rgba(255, 255, 255, 0.1); /* Add a subtle shadow */
+            text-align: center; /* Center text inside the form */
+            max-width: 400px; /* Set a maximum width for the form */
+            width: 100%; /* Make the form responsive */
+            text-align: left;
+        }
+
+        form h1 {
+            margin-bottom: 1rem; /* Add space below the heading */
+            text-align: center;
+            color: var(--text_col); /* Change the heading color */
+        }
+        form button {
+            padding: 0.5rem 1rem;
+            color: var(--text_col);
+            border: 2px solid var(--text_col);
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1rem;
+            margin-bottom:15px;
+        }
+    </style>
+    {% include 'toggle-menu.html' %}
+    <title>Login</title>
+    <div class="container">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <!-- Form fields will be rendered here -->
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+            <a href="{% url 'password_reset' %}">Lost Password</a>
+        </form>
+        <!-- Display error messages (e.g., for unverified users) -->
+        {% if messages %}
+        <div style="color: red; font-weight: bold; position: absolute; top: 260px; left: 50%; transform: translateX(-50%);">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

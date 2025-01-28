@@ -1,0 +1,175 @@
+{% extends 'volunteers/volunteers_header.html' %}
+
+{% load static %}
+
+
+{% block header_title %}Volunteer Review Form{% endblock %}
+{% block header_text %}Submit a review about your experience!{% endblock %}
+<title>Volunteer Dashboard</title>
+
+{% block content %}
+<style>
+    /* Form formatting */
+    .container {
+        display: flex;
+        max-width: 1500px;
+        margin: 20px auto;
+        gap: 20px;
+    }
+
+    .contact-info {
+        background-color: #5ea3a1;
+        background-image: url("{% static 'images/volunteer_pages/vol_form_bkg.jpg' %}");
+        background-size: 95%;
+        padding: 20px;
+        width: 30%;
+        border-radius: 5px;
+    }
+
+    .contact-info h2 {
+        margin-top: 0;
+        color: white;
+    }
+
+    .contact-info p {
+        margin: 10px 0;
+        color: white;
+    }
+
+    .contact-info a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .contact-form {
+        background-color: transparent;
+        padding: 20px;
+        width: 70%;
+        border-radius: 5px;
+        
+    }
+
+    .contact-form h2 {
+        margin-top: 0;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+  
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        color: var(--text_col);
+        background-color: rgb(36, 43, 63);
+        border: 2px solid var(--text_col);
+        border-radius: 15px;
+    }
+    input[type="number"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        color: var(--text_col);
+        background-color: rgb(36, 43, 63);
+        border: 2px solid var(--text_col);
+        border-radius: 15px;
+    }
+
+  
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid var(--text_col);
+        cursor: pointer;
+        border-radius: 25px;
+        background-color: transparent;
+        color: var(--text_col);
+
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+
+<title>Volunteer Review Form</title>
+<body>
+    <div class="container">
+        <div class="contact-info">
+          <h2>About Us</h2>
+          <p><strong>Home:</strong> Baltimore, Maryland</p>
+          <p><strong>General Inquiries</strong>: <a href="awesometroller1234@gmail.com">awesometroller1234@gmail.com</a></p>
+        </div>
+        
+        <div class="contact-form">
+          <h2>Submit Your Review!</h2>
+          <form method="POST" action="{% url 'volunteer_form' %}">
+            {% csrf_token %}
+            
+            <!-- Review Content -->
+            <div class="form-group">
+                <label for="Review_Content">Review Content</label>
+                {{ form.Review_Content }}
+            </div>
+            
+            <!-- Rating -->
+            <div class="form-group">
+                <label for="Rating">Rating (1-10)</label>
+                {{ form.Rating }}
+                {% if form.Rating.errors %}
+                    <span class="error-message">{{ form.Rating.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <!-- Department -->
+            <div class="form-group">
+                <label for="Department">Department</label>
+                {{ form.Department }}
+            </div>
+            
+            <!-- Volunteer ID -->
+            <div class="form-group">
+                <label for="vol_ID">Volunteer ID</label>
+                {{ form.vol_ID }}
+            </div>
+            
+            <!-- Admin Username -->
+            <div class="form-group">
+                <label for="admin_user">Admin Username</label>
+                {{ form.admin_user }}
+                {% if form.admin_user.errors %}
+                    <span class="error-message">{{ form.admin_user.errors.0 }}</span>
+                {% endif %}
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Submit Review">
+            </div>
+        </form>
+        </div>
+      </div>
+  
+
+{% endblock %}
+
+

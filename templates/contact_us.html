@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get in touch form with responsive design">
+  <meta name="author" content="George Martsoukos">
+  <title>Get in Touch Form</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+    :root {
+      --white: rgba(199, 199, 234, 0.886);
+      --red: #e31b23;
+      --bodyColor: #000000;
+      --formBgColor: hsl(0, 0%, 15%);
+      --borderFormEls: hsl(0, 0%, 10%);
+      --bgFormEls: hsl(0, 0%, 14%);
+      --bgFormElsFocus: hsl(0, 7%, 20%);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      font: 18px/1.5 "Open Sans", sans-serif;
+      background: var(--bodyColor);
+      color: var(--white);
+      margin: 1.5rem 0;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      gap: 2rem; /* Add space between the columns */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .textbox {
+      flex: 1; /* Allow the textbox to take one part of the width */
+      background: var(--formBgColor);
+      padding: 2rem;
+      border-radius: 8px;
+      background-color: black;
+    }
+
+    .textbox p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    #form-section {
+      flex: 2; /* Allow the form to take two parts of the width */
+    }
+
+    .my-form ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .my-form ul li {
+      margin-bottom: 1.5rem;
+    }
+
+    .my-form input,
+    .my-form textarea,
+    .my-form select,
+    .my-form button {
+      width: 100%;
+      line-height: 1.5;
+      padding: 15px 10px;
+      border: 1px solid var(--borderFormEls);
+      background: var(--bgFormEls);
+      color: var(--white);
+      border-radius: 4px;
+    }
+
+    .my-form textarea {
+      height: 170px;
+    }
+
+    .my-form button {
+      font-weight: bold;
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      border: 2px solid var(--white);
+    }
+
+    .my-form button:hover {
+      background: rgb(192, 192, 243);
+    }
+
+    footer {
+      font-size: 1rem;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Above the Entire Form -->
+  <h1>Contact Us!</h1>
+
+  <div class="container">
+    <!-- Textbox Section -->
+    <div class="textbox">
+      <p>
+        We're excited to hear from you! Please fill out the form to your right, and let us know how we can help.
+        If you have specific questions, feel free to include them in your message.
+      </p>
+      <p>
+        Alternatively, you can reach us at <strong>bchang27@jh.edu</strong>.
+      </p>
+    </div>
+
+    <!-- Form Section -->
+     <div id="form-section">
+    <form class="my-form" method="post" action="{% url 'index' %}">
+      {% csrf_token %}
+      <ul>
+        <!-- Email -->
+        <li>
+          <label for="id_email">Email:</label>
+          {{ form.email }}
+          {% if form.email.errors %}
+            <div class="text-danger">
+              {% for error in form.email.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </li>
+
+        <!-- First Name -->
+        <li>
+          <label for="id_first_name">First Name:</label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}
+            <div class="text-danger">
+              {% for error in form.first_name.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </li>
+
+        <!-- Last Name -->
+        <li>
+          <label for="id_last_name">Last Name:</label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}
+            <div class="text-danger">
+              {% for error in form.last_name.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </li>
+
+        <!-- Message -->
+        <li>
+          <label for="id_message">Message:</label>
+          {{ form.message }}
+          {% if form.message.errors %}
+            <div class="text-danger">
+              {% for error in form.message.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </li>
+
+        <!-- Submit Button -->
+        <li>
+          <button type="submit" class="btn-grid">
+            <span class="front">Submit Review</span>
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+  </div>
+</body>
+
+</html>

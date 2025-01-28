@@ -1,0 +1,98 @@
+html {
+    height: 100%;
+    font-family: sans-serif;
+}
+:root{
+    --font-col: rgb(211, 211, 253);
+}
+body {
+    background: rgb(0, 0, 0); /* Darker gradient */
+    display: flex;
+    flex-direction: column; /* Allow vertical expansion */
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+    min-height: 100vh; /* Ensures the body takes at least the full viewport height */
+    color: var(--font-col); /* Set text color to white for contrast */
+    padding: 1rem; /* Ensure content is not against the edges */
+    background-size: 100% auto; /* Ensure background stretches across the full width */
+    background-attachment: fixed; /* Keeps the background fixed while scrolling */
+    margin-bottom: 200px;  
+}
+
+/* Form styling */
+form {
+    background-color: none; /* Dark gray background for the form */
+    border-radius: 8px; /* Slightly round corners */
+    padding: 2rem;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px; /* Maximum width for form */
+    min-height: 400px; /* Set a minimum height to ensure form has some vertical space */
+}
+
+/* Form items style */
+form input,
+form select,
+form textarea {
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Light shadow for inputs */
+    border: none;
+    background-color: #202539; /* Dark input background */
+    color: var(--font-col); /* White text for inputs */
+    border: 1px solid var(--font-col);
+}
+
+/* style for links */
+a {
+    color: var(--font-col); /* White text color */
+    
+}
+
+a:hover {
+    color: rgb(178, 183, 239); /* Change to a different color when hovered, you can adjust this */
+}
+
+/* Make textarea expand with content */
+form textarea {
+    height: auto;
+    min-height: 100px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+/* Button styling */
+form button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+    background-color: rgb(0, 0, 0); /* Button color */
+    border: none;
+    color: rgba(253, 231, 231, 0.886);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+    text-decoration: underline;
+}
+
+form button:hover {
+    background-color: rgb(192, 192, 243); /* Darker on hover */
+}
+
+/* Error list styling */
+form .errorlist li {
+    list-style-type: none;
+    color: rgba(249, 64, 2, 0.772); /* Orange color for error text */
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 600px) {
+    form {
+        width: 90%; /* Makes the form take up 90% of the screen width on mobile */
+    }
+}

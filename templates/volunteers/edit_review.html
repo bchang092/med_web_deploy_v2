@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{%block title %}Edit Review {%endblock%}
+
+{%block content%}
+<style>
+    /*links tyles*/
+    .myStyledLink a {
+   color: rgb(100,100,300);
+    }
+
+    .myStyledLink a:link {
+    color: rgb(255, 255, 255);
+    }
+
+    .myStyledLink a:visited {
+    color: rgb(239, 237, 246);
+
+    }
+
+    .myStyledLink a:focus {
+    color: rgb(234, 224, 220);
+
+    }
+
+    .myStyledLink a:hover {
+    color: rgb(109, 182, 255);
+    }
+
+
+
+</style>
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="{{ form.Rating.id_for_label }}">
+            {{ form.Rating.label }} 
+            <small class="help-text">{{ form.Rating.help_text }}</small>  <!-- Add help text next to label -->
+        </label>
+        {{ form.Rating }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Review_Content.id_for_label }}">
+            {{ form.Review_Content.label }}
+        </label>
+        {{ form.Review_Content }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.Department.id_for_label }}">
+            {{ form.Department.label }}
+        </label>
+        {{ form.Department }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.vol_ID.id_for_label }}">
+            {{ form.vol_ID.label }}
+            <small class="help-text">{{ form.vol_ID.help_text }}</small>  <!-- Add help text next to label -->
+        </label>
+        {{ form.vol_ID }}
+    </div>
+
+    <button type="submit">Save Changes</button>
+    <h6 class="myStyledLink">
+        <a href="{% url 'volunteer_stats' %}">Back to Your Reviews</a>
+    </h6>
+</form>
+
+
+
+
+{%endblock%}
+
+

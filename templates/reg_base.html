@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8"/>
+    <meta name = "viewport" content ="width-device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="{%static 'css/styles.css'%}"/>
+<meta name = "description" content = ""/>
+</head>
+
+<style>
+:root {
+    --text_col: rgba(199, 199, 234, 0.886);
+    --description_text_col: rgba(199, 199, 234, 0.5);
+    --pic_col: rgba(72, 175, 179, 0.886);
+    --pic_size: 200px;
+    --hover-col:rgb(178, 183, 239);
+}
+.bkg-img-container {
+            display: flex; /* Enable flexbox */
+            justify-content: center; /* Horizontally center the form */
+            align-items: center; /* Vertically center the form */
+            background-image: url("{% static 'images/home_pages/login-bkg2.jpg' %}");
+            background-size: cover; /* Ensure the background image covers the entire container */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent tiling of the image */
+            width: 100%; /* Take up the full width */
+            height: 100vh; /* Take up the full height of the viewport */
+        }
+</style>
+
+</html>

@@ -1,0 +1,140 @@
+{% extends 'admin_views/admin_header.html' %}
+{% load static %}
+{% block header_title %}Admin Dashboard{% endblock %}
+{% block header_text %}Welcome {{name}}!{% endblock %}
+{% block content %}
+<style>
+    .container-display-stats{
+        width: 400px;
+        height: 600px;
+        border-radius: 10px;
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;    
+    }   
+
+    /* Spacing between icon and text */
+    .container-display-stats h3 {
+        margin-top: 20px;  /* Adjust this for the desired spacing */
+        max-width: 350px;
+        font-size:30px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        color: var(--text_col);
+    }
+
+    @media (max-width: 768px) {
+        .container-display-stats i {
+            font-size: 60px;
+        }
+    }
+
+    .purpose-container {
+        display: flex;
+        width: 100%;
+        margin-left: var(--margin-size);
+        margin-right: var(--margin-size);
+        gap: 2rem; /* Space between the columns */
+        justify-content: flex-start; /* Align items to the left */
+        flex-direction: row;
+        text-align: left;
+        margin-bottom: 100px;
+        padding: 20px;
+        line-height: 25px;
+    }
+
+    .purpose-left {
+        flex: 0 1 25%; /* This allows it to take up 30% of the space */
+        max-width: 30%;
+        margin-top: 5px;
+        margin-left: 1px;
+        background-color: transparent;
+        padding: 20px;
+        text-align: left;
+        border-radius: 25px;
+        border: 2px solid var(--text_col);
+    }
+    .purpose-left h2 {
+        margin-top: 0;
+    }
+    .purpose-left a {
+        margin-top: 0;
+        color: var(--text_col);
+    }
+
+    .purpose-right {
+        flex: 0 1 60%; /* This allows it to take up the remaining 60% */
+        max-width: 60%;
+        margin-top: 5px;
+    }
+
+    .purpose-pic {
+        background-image: url("{% static 'images/volunteer_pages/vol_home_img.jpg' %}");
+        margin-left: var(--margin-size);
+        margin-right: var(--margin-size);
+        height: 300px; /* Set a fixed height or use min-height */
+        background-size: cover; /* Ensure the image scales to cover the area */
+        background-position: center; /* Center the image */
+    }
+</style>
+<title>Admin Home Page</title>
+   <!-- Stats Container -->
+<div style="display: flex; justify-content: space-around; margin-top: 20px;">
+    <!-- Departments Worked In -->
+    <div class="container-display-stats">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-hospital" style="font-size:250px; color:var(--icon-col);"></i>
+        </div>
+        <h3>Departments Reviewed by Volunteers</h3>
+        <h3>{{department_count}}</h3>
+    </div>
+
+    <!-- Number of Volunteers -->
+    <div class="container-display-stats">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-handshake-angle" style="font-size:250px; color:var(--icon-col);"></i>
+        </div>
+        <h3>Number of Volunteers </h3>
+        <h3>{{volunteer_count}}</h3>
+    </div>
+
+    <!-- Number of Reviews -->
+    <div class="container-display-stats">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-magnifying-glass" style="font-size:250px; color:var(--icon-col);"></i>
+        </div>
+        <h3>Number of Volunteer Reviews </h3>
+        <h3>{{review_count}}</h3>
+    </div>
+</div>
+
+<!-- purpose container -->
+<div class="purpose-container">
+    <div class="purpose-left">
+        <h1>Problems or Inquiries?</h1>
+        <h2>Contact Us:</h2>
+          <p><strong>Email:</strong> bchang092@gmail.com</p>
+          <p><strong>Linkedin</strong>: <a href="www.linkedin.com/in/brandon-chang-34970a285">Brandon Chang</a></p>
+        
+
+    </div>
+    
+    <div class="purpose-right">
+        <h1>Our Volunteer Review System</h1>
+        <div class="purpose-pic"></div>
+        <h3>As the admin of this review platform, you play a key role in ensuring that valuable feedback from elderly patients is captured and acted upon. Elderly patients, typically those over 60, make up 30-40% of all hospital patients. However, many of these individuals face difficulties navigating complex systems to submit their feedback. Instead, the often opt to verbally share their experiences to our volunteers. 
+            <br><br>
+            Many hospitals lack the infrastructure to effectively channel feedback from volunteers, missing out on critical insights that could enhance patient care. This platform is designed to ensure that these insights are collected and analyzed systematically, providing an unbiased perspective on hospital services. We've provided vital analysis tools for you to transform patient experiences by identifying areas of improvement.
+        </h3>
+    </div>
+
+    
+
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,95 @@
+<div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<div class="menu" id="menu">
+    <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        <!-- Add other links as needed -->
+    </ul>
+</div>
+
+<style>
+  
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        top: 10px; /* Adjust position as needed */
+        left: 20px;
+        z-index: 10;
+    }
+
+    .bar {
+        width: 30px;
+        height: 3px;
+        background-color: rgba(199, 199, 234, 0.886);
+        margin: 8px 0; /* Increase space between bars to avoid overlap */
+        transition: 0.3s;
+        text-align: left;
+    }
+
+    .menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 175px;
+        background-color: #202539;
+        padding: 10px;
+        z-index: 5;
+        box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 100px; /* Add some space between the top and menu items */
+    }
+
+    .menu ul li {
+        margin: 20px 0;
+    }
+
+    .menu ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        padding: 5px;
+    }
+
+    .menu ul li a:hover {
+        background-color: #333;
+    }
+
+    .open .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .open .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .open .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+</style>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        const hamburger = document.querySelector(".hamburger-menu");
+
+        // Toggle the menu visibility
+        menu.style.display = (menu.style.display === "block" ? "none" : "block");
+
+        // Toggle the hamburger animation
+        hamburger.classList.toggle("open");
+    }
+</script>

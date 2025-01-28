@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    {% include 'reg_base.html' %}
+    <style>
+        html, body{
+            overflow-x: hidden; 
+            width: 100%;
+            background-color: rgb(2, 0, 41);
+        }
+        .container {
+            display: flex; /* Enable flexbox for side-by-side layout */
+            min-width: 100%;
+            margin: 0 auto;
+            gap: 2rem; /* Add space between the columns */
+        }
+
+        .container-picture {
+            flex: 65%; /* Occupy one part of the available space */
+            background-image: url("{% static 'images/home_pages/reg_bkg_v2.jpg' %}");
+            background-size: cover; /* Ensure the image fully covers its area */
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 800px; /* Set a fixed height */
+        }
+
+        .container-form {
+            flex: 35%; /* Occupy two parts of the available space */
+            padding: 20px; /* Optional padding for spacing */
+            background-image: url("{% static 'images/home_pages/login-bkg2.jpg' %}");            border-radius: 8px; /* Optional: Add rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+            margin-left:5px;
+        }
+
+
+        .container-form button {
+            padding: 0.5rem 1rem;
+            background-color: none;
+            color: white;
+            border: 2px solid var(--text_col);
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom:10px;
+        }
+
+        .container-form button:hover {
+            background-color: var(--hover-col); /* Darker shade on hover */
+        }
+
+        .form-style{
+            background-color: none;
+        }
+
+    </style>
+    <title>Register</title>
+    {% include 'toggle-menu.html' %}
+    <div class="container">
+        <div class="container-picture"></div>
+        <div class="container-form">
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <h1>Sign up!</h1>
+                {{ form.as_p }}
+                <button type="submit">Register</button>
+                <a href="{% url 'login' %}">Already have an account?</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

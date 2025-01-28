@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <style>
+        :root {
+            --text_col: rgba(199, 199, 234, 0.886);
+            --description_text_col: rgba(199, 199, 234, 0.5);
+            --pic_col: rgba(72, 175, 179, 0.886);
+            --pic_size: 200px;
+            --hover-col:rgb(178, 183, 239);
+        }
+  
+        .header_1 {
+            background-image: url("{% static 'images/home_pages/index_1.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--text_col);
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+   
+        .header_1-text {
+            position: absolute;
+            width: 70%; /* You can modify the width here */
+            text-align: center; /* Optional: Ensure the text is centered */
+            padding: 0 15px; /* Optional: Add padding for better spacing */
+        }
+
+        .header_1 h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .header_1 h2 {
+            font-size: 1.5rem;
+            font-weight: lighter;
+            margin: 20px 0;
+        }
+
+        form {
+            background: none;
+            padding: 0;
+            border: none;
+            display: inline;
+        }
+
+        .login-btn, .register-btn {
+            position: absolute;
+            top: 10px;
+            color: var(--text_col);
+            padding: 5px 10px;
+            border: 2px solid var(--text_col);
+            border-radius: 25px;
+            cursor: pointer;
+            width: fit-content;
+            height: fit-content;
+            text-decoration: none;
+
+        }
+
+        .login-btn {
+            right: 10px;
+        }
+
+        .register-btn {
+            right: 80px;
+        }
+        #contact-us-btn {
+            padding: 10px 20px;
+            color: var(--text_col);
+            border-radius: 25px;
+            border: 2px solid var(--text_col);
+            cursor: pointer;
+            font-size: 16px;
+            background-color: transparent;
+            margin-top: 10px; /* Add a small margin to space it from the previous item */
+            display: inline-block; /* Ensures it stays aligned within the flow */
+        }
+
+        #contact-us-btn:hover {
+            background-color: var(--hover-col);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .review-form-container {
+            width: 800px;
+            margin: 0 auto;
+        }
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
+
+        /* displaying info containers */
+        .container-display-info{
+            width: 500px;
+            height: 600px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;  
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+        /* Spacing between icon and text */
+        .container-display-info h1 {
+            margin-top: 20px;  /* Adjust this for the desired spacing */
+            max-width: 350px;
+            font-size: 30px;
+            font-weight: bold;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            color: var(--text_col);
+        }
+        .container-display-info h3 {
+            max-width: 350px;
+            font-size:15px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            color: var(--description_text_col);
+        }
+
+        @media (max-width: 768px) {
+            .container-display-info i {
+                font-size: 60px;
+            }
+        }
+        .about-us-container {
+            display: flex;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+            gap: 2rem; /* Add space between the columns */
+        }
+
+        .about-us-picture {
+            flex: 1; /* Make sure the picture occupies equal space */
+            background-image: url("{% static 'images/home_pages/patient-care.png' %}");
+            background-size: 80%; /* Ensure the image covers the container */
+            background-position: center;
+            width: 80%;
+            height: 80%;
+            background-repeat: no-repeat;
+            display: flex;
+            min-height:600px; /* Set a minimum height */
+            object-fit: cover; /* Ensure the image doesn't stretch */
+            margin-right: 50px;
+        }
+
+        .about-us-text {
+            flex: 1; /* Make sure the text occupies equal space */
+            padding: 20px; /* Optional padding for spacing around text */
+            padding-right: 40px; /* Add space to move text to the left */
+            margin-left: 50px;
+        }
+
+        .about-us-text h1 {
+            margin-top: 20px;  /* Adjust this for the desired spacing */
+            font-size: 35px;
+            font-weight: bold;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            color: var(--text_col);
+            text-align: left;  /* Ensure text aligns to the left */
+        }
+
+        .about-us-text h3 {
+            font-size: 18px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            color: var(--description_text_col);
+            text-align: left; /* Align h3 to the left as well */
+        }
+
+    </style>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Home</title>
+
+    {% if user.is_authenticated %}
+        <script type="text/javascript">
+            window.location.href = "{% url 'auto_logout' %}";
+        </script>
+    {% else %}
+        <div class="header_1">
+            <div>{% include 'toggle-menu.html'%}</div>
+            <form action="{% url 'login' %}" method="get">
+                <button class="login-btn" type="submit">Login</button>
+            </form>
+            <form action="{% url 'register' %}" method="get">
+                <button class="register-btn" type="submit">Register</button>
+            </form>
+            <div class="header_1-text">
+                <h1>VitalVoices</h1>
+                <h2>Your comprehensive hospital volunteer review page, designed to streamline and enhance communication with volunteers for better patient care.</h2>
+                <button id="contact-us-btn" onclick="document.getElementById('form-section').scrollIntoView();">
+                    Contact Us
+            </div>           
+        </div>
+
+        <div class="about-us-container">
+            <div class="about-us-text">
+                <h1>
+                    About Us and Our Mission Statement
+                </h1>
+                <h3>
+                    As a guest ambassador at a local hospital, I serve as a primary point of contact for patients, interacting daily to provide support and address their needs. Through engaging with over a thousand patients, I've gained invaluable insights into their experiences. However, a critical issue persists: a lack of effective communication between volunteers and hospital administration. <br>
+                    <br>
+                    This gap is particularly detrimental because patients – especially elderly individuals unfamiliar with online feedback systems – often prefer to share their concerns with the most direct point of contact: volunteers. This valuable feedback often goes unheard, leaving a significant gap in understanding patient needs. This problem is experienced by millions of volunteers nationwide.<br>
+                    <br>
+                    Our mission with this website is to bridge this communication gap, establishing a direct line between volunteers and hospital staff. This ensures that both patient concerns shared through volunteers and volunteer feedback are heard, ultimately enhancing patient care and satisfaction.
+                </h3>
+            </div>
+            <div class="about-us-picture"></div>
+        </div>
+        <!-- Stats Container -->
+        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+            <!-- Departments Worked In -->
+            <div class="container-display-info">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-comment-dots" style="font-size:var(--pic_size); color:var(--pic_col);"></i>
+                </div>
+                <h1>
+                    Volunteer-Admin Communication
+                </h1>
+                <h3>
+                    We provide a clear communication channel between volunteers and administrators to actively manage and assess patient care, with transparent access to past reviews from both parties.
+                </h3>
+            </div>
+
+            <!-- AI based review analysis -->
+            <div class="container-display-info">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-hexagon-nodes-bolt" style="font-size:var(--pic_size); color:var(--pic_col);"></i>
+                </div>
+                <h1>
+                    AI-based Sentiment Analysis 
+                </h1>
+                <h3>
+                    We have developed a custom filter system powered by AI language models to analyze volunteer review sentiments, offering a more accurate assessment of volunteer and patient satisfaction beyond simple ratings.
+                </h3>
+            </div>
+
+            <!-- Graphical Displays -->
+            <div class="container-display-info">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-magnifying-glass-chart" style="font-size:var(--pic_size); color:var(--pic_col);"></i>
+                </div>
+                <h1>
+                    Comprehensive Graphical Analysis
+                </h1>
+                <h3>
+                    We have created a comprehensive graphical analysis page that provides a clear breakdown of overall hospital and departmental performance, highlighting areas for improvement and satisfaction.
+                </h3>
+            </div>
+        </div>
+
+        {% include 'contact_us.html' %}
+
+    {% endif %}
+
+{% endblock %}

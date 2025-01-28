@@ -1,0 +1,97 @@
+{% extends 'volunteers/volunteers_header.html' %}
+
+{% load static %}
+
+
+{% block header_title %}Volunteer Dashboard{% endblock %}
+{% block header_text %}Welcome {{name}}!{% endblock %}
+<title>Volunteer Dashboard</title>
+
+{% block content %}
+<style>
+ 
+    .chart-container {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        gap: 2rem; /* Space between the columns */
+        justify-content: space-evenly;
+    }
+
+    .chart-container-text {
+        flex: 1; /* Ensures both sections take up equal space */
+        padding: 20px; /* Optional: add padding for spacing */
+        box-sizing: border-box; /* Includes padding in width calculations */
+        max-width: 40%;
+        text-align: left;
+        margin-top: 10%;
+    }
+
+    .chart-container-chart {
+        flex: 1; /* Ensures both sections take up equal space */
+        padding: 20px; /* Optional: add padding for spacing */
+        box-sizing: border-box; /* Includes padding in width calculations */
+        max-width: 50%;
+        display: flex; /* Use flexbox for alignment */
+        justify-content: center; /* Center chart horizontally */
+        align-items: center; /* Center chart vertically */
+        margin-top: 15%;
+    }
+
+    #doughnut {
+        width: 90%; /* Adjust width to enlarge the chart */
+        height: 90%; /* Adjust height to enlarge the chart */
+        min-width: 400px; /* Set a maximum size to avoid overflow */
+        min-height: 400px; /* Set a maximum size to avoid overflow */
+    }
+    .purpose-container{
+        display: flex;
+        width: 60%;
+        margin: 0 auto;
+        gap: 2rem; /* Space between the columns */
+        justify-content: space-evenly;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 100px;
+        padding: 20px;
+        line-height:25px;
+    }
+    .purpose-pic {
+        background-image: url("{% static 'images/volunteer_pages/vol_home_img.jpg' %}");
+        margin-left: var(--margin-size);
+        margin-right: var(--margin-size);
+        height: 300px; /* Set a fixed height or use min-height */
+        background-size: cover; /* Ensure the image scales to cover the area */
+        background-position: center; /* Center the image */
+    }
+</style>
+
+
+ <title>Volunteer Home Page</title>
+<div class="chart-container">
+   <div class="chart-container-text">
+       <h1> Sentiment Distribution of Your Reviews:</h1>
+       <h3>We deeply appreciate your valuable feedback! The semi-pie chart on the right illustrates the overall distribution of sentiments from the reviews you’ve shared.</h3>
+   </div>
+   <div id="chart-container-chart">
+       <canvas id="doughnut"></canvas>
+       <script>const sentimentsDict = JSON.parse('{{ sentiments_dict|escapejs }}');</script>
+       <h1>{{sentimentsDict}}</h1>
+       <script src="{% static 'analysis/doughnut_sentiment.js' %}"></script>   
+   </div>
+</div>
+
+<div class="purpose-container">
+    <h1>Why Your Voice Matters</h1>
+    <div class="purpose-pic"></div>
+    <h3>Elderly patients, typically those over 60 years old, make up 30-40% of all hospital patients. However, many of these patients struggle to navigate the complex systems hospitals use for feedback submission. As a result, they often prefer to communicate their experiences verbally to someone they trust—like you, the volunteer. Unfortunately, many hospitals lack proper communication channels with volunteers, missing out on an important source of insights that could significantly improve patient care. Your voice provides an unbiased perspective on hospital services, playing an invaluable role in enhancing the overall patient experience.
+    </h3>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+
+{% endblock %}
+
+
